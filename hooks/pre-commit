@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Run pylint on the specific Python file
+pylint main.py
+
+exit 0

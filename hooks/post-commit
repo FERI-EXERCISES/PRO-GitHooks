@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Sporočilo, ki se pošlje
+message="Commit was made to the repo: $(git log -1 --pretty=%B)"
+
+# Webhook URL za vaš Discord kanal
+webhook_url="https://discord.com/api/webhooks/1239930669858029689/DX2yCWIDNPEcEubc1WaAioNyOZDV2I2UVOYcvvZNkbPOOvcweOtc3JVJ_q_ybyT8cUIK"
+
+# Pošiljanje sporočila na Discord
+curl -H "Content-Type: application/json" \
+     -d "{\"content\": \"${message}\"}" \
+     $webhook_url

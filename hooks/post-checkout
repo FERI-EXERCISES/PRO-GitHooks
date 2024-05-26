@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Prejšnji commit hash
+previous_head=$1
+
+# Trenutni commit hash
+new_head=$2
+
+# Izpis razlik
+echo "Changes from $previous_head to $new_head:"
+git diff --name-status $previous_head $new_head
+
+# Preverjanje datotek, ki morajo biti prisotne
+files_to_check=("README.md" "main.py")
+missing_files=0
+
+for file in "${files_to_check[@]}"; do
+  if [ ! -f "$file" ]; then
+    echo "Missing required file: $file"
+    ((missing_files++))
+  fi
+done
+
+if [ $missing_files -ne 0 ]; then
+  echo "Some required files are missing."
+  exit 1
+fi
+
+echo "Repository is valid."
+
+exit 0
